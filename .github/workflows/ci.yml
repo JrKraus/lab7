@@ -39,8 +39,7 @@ jobs:
         with:
           dotnet-version: '6.0'
 
-      - name: Navigate to solution directory
-        run: cd ${{ env.Solution_Directory }}
+      
         
       - name: Restore dependencies
         run: dotnet restore  ${{ env.Test_Project_Path }}
@@ -48,8 +47,7 @@ jobs:
       - name: Build the project
         run: dotnet build  ${{ env.Test_Project_Path }} -c Release
 
-      - name: Navigate back to root directory for testing
-        run: cd ../
+      
 
       - name: Run unit tests
         run: dotnet test  ${{ env.Test_Project_Path }} -c Release --logger "github;verbosity=detailed
