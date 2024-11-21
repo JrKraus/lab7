@@ -51,4 +51,4 @@ jobs:
       
       
       - name: Run unit tests
-        run: dotnet test ${{ env.Test_Project_Path }} -c Release --logger "github;verbosity=normal
+        run: dotnet test ${{ env.testproject4.csproj }} -c Release --logger "github;verbosity=normal
