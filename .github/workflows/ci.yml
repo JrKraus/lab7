@@ -1,47 +1,44 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 name: .NET Core Console CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
-
     name: build-and-test-${{matrix.os}}
     runs-on: ${{ matrix.os }}
     strategy:
-
       matrix:
-
         os: [ubuntu-latest, windows-latest, macOS-latest]
-               
 
     env:
-
       Solution_Name: Blazor Lab Starter Code.sln
-
       Test_Project_Path: testproject4.csproj
-    
-    
+      Solution_Directory: ./path/to/solution  # Replace with your actual path
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0'
 
+      - name: Navigate to solution directory
+        run: cd ${{ env.Solution_Directory }}  # Navigate to the correct directory if needed
+
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ env.Solution_Name }}
 
       - name: Build the project
-        run: dotnet build -c Release
+        run: dotnet build ${{ env.Solution_Name }} --configuration Release --no-restore
+
+      - name: Navigate back to root directory for testing
+        run: cd ../  # Go back to the root directory if necessary
 
       - name: Run unit tests
-        run: dotnet test -c Release --logger "github;verbosity=detailed"
-        
+        run: dotnet test ${{ env.Test_Project_Path }} --no-restore --verbosity detailed
