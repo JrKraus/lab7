@@ -43,10 +43,10 @@ jobs:
         run: cd ${{ env.Solution_Directory }}
         
       - name: Restore dependencies
-        run: dotnet restore ${{ env.Solution_Name }}
+        run: dotnet restore  ${{ env.Test_Project_Path }}
 
       - name: Build the project
-        run: dotnet build ${{ env.Solution_Name }} -c Release
+        run: dotnet build  ${{ env.Test_Project_Path }} -c Release
 
       - name: Navigate back to root directory for testing
         run: cd ../
