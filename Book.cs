@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Blazor_Lab_Starter_Code {
     public class Book {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string ISBN { get; set; }
+        public require int Id { get; set; }
+        public require string Title { get; set; }
+        public require string Author { get; set; }
+        public require string ISBN { get; set; }
     }
 }
